@@ -1,0 +1,17 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/var/www
+      - ./.env:/var/www/.env
+    environment:
+      APP_ENV: local
+
+  composer:
+    image: composer:2.1
+    working_dir: /var/www
+    volumes:
+      - ./src:/var/www
+    command: ["composer", "install"]
